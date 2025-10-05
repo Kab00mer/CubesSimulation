@@ -10,9 +10,9 @@ class Shape {
 		Shape();
 		size_t getDimension() const;
 		virtual void rotate(float);
-		virtual std::vector<std::pair<int, int>> returnLines();
+		virtual std::vector<std::pair<std::pair<float, float>, std::pair<float,float>>> returnLines() const;
 		
-	private:
+	protected:
 		size_t dimension;
 		std::vector<std::vector<float>> verticies;	
 };
@@ -21,23 +21,23 @@ class Square : public Shape {
 	public:
 		Square();
 		void rotate(float) override;
-		std::vector<std::pair<int, int>> returnLines() override;
+		std::vector<std::pair<std::pair<float, float>, std::pair<float,float>>> returnLines() const override;
 
 	private:
-		void rotateX(float);
-		void rotateY(float);
+		void rotateX(float, std::vector<float>&, int, int);
+		void rotateY(float, std::vector<float>&, int, int);
 };
 
 class Cube : public Shape {
 	public:
 		Cube();
 		void rotate(float) override;
-		std::vector<std::pair<int, int>> returnLines() override;
+		std::vector<std::pair<std::pair<float, float>, std::pair<float,float>>> returnLines() const override;
 
 	private:
-		void rotateX(float);
-		void rotateY(float);
-		void rotateZ(float);
+		void rotateX(float, std::vector<float>&, int, int, int);
+		void rotateY(float, std::vector<float>&, int, int, int);
+		void rotateZ(float, std::vector<float>&, int, int, int);
 
 		std::vector<std::pair<int, int>> project3DTo2D() const;
 };
@@ -46,13 +46,13 @@ class Hypercube : public Shape {
 	public:
 		Hypercube();
 		void rotate(float) override;
-		std::vector<std::pair<int, int>> returnLines() override;
+		std::vector<std::pair<std::pair<float, float>, std::pair<float,float>>> returnLines() const override;
 
 	private:
-		void rorateX(float);
-		void rotateY(float);
-		void rotateZ(float);
-		void rotateW(float);
+		void rotateX(float, std::vector<float>&, int, int, int, int);
+		void rotateY(float, std::vector<float>&, int, int, int, int);
+		void rotateZ(float, std::vector<float>&, int, int, int, int);
+		void rotateW(float, std::vector<float>&, int, int, int, int);
 		
 		std::vector<std::tuple<float, float, float>> project4DTo3D() const;
 		std::vector<std::pair<int, int>> project3DTo2D(std::vector<std::tuple<float, float, float>>) const;
