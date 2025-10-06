@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -std=c++17 -I/home/mryvkin/SDL/include
 LDFLAGS = /home/mryvkin/SDL/build-static/libSDL3.a -lm -ldl -lpthread
 
 # Executable
-TARGET = Hypercube 
+TARGET = CubesSim
 
 # Source Files
 SRCS := $(wildcard *.cpp)
