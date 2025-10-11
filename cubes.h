@@ -14,7 +14,7 @@ class Shape {
 		
 	protected:
 		size_t dimension;
-		std::vector<std::vector<float>> verticies;	
+		std::vector<std::vector<float>> vertices;	
 };
 
 class Square : public Shape {
@@ -22,10 +22,6 @@ class Square : public Shape {
 		Square();
 		void rotate(float) override;
 		std::vector<std::pair<std::pair<float, float>, std::pair<float,float>>> returnLines() const override;
-
-	private:
-		void rotateX(float, std::vector<float>&, float, float);
-		void rotateY(float, std::vector<float>&, float, float);
 };
 
 class Cube : public Shape {
@@ -35,10 +31,6 @@ class Cube : public Shape {
 		std::vector<std::pair<std::pair<float, float>, std::pair<float,float>>> returnLines() const override;
 
 	private:
-		void rotateX(float, std::vector<float>&, float, float, float);
-		void rotateY(float, std::vector<float>&, float, float, float);
-		void rotateZ(float, std::vector<float>&, float, float, float);
-
 		std::vector<std::pair<float, float>> project3DTo2D() const;
 };
 
@@ -49,11 +41,6 @@ class Hypercube : public Shape {
 		std::vector<std::pair<std::pair<float, float>, std::pair<float,float>>> returnLines() const override;
 
 	private:
-		void rotateX(float, std::vector<float>&, float, float);
-		void rotateY(float, std::vector<float>&, float, float);
-		void rotateZ(float, std::vector<float>&, float, float);
-		void rotateW(float, std::vector<float>&, float, float);
-		
 		std::vector<std::tuple<float, float, float>> project4DTo3D() const;
 		std::vector<std::pair<float, float>> project3DTo2D(std::vector<std::tuple<float, float, float>>) const;
 };
