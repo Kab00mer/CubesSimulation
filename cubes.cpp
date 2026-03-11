@@ -5,11 +5,35 @@ static const float Z_PRIME = 6.0; //Distance used for projecting 3D to 2D
 static const float W_PRIME = 4.0; //Distance used for pojecting 4D to 3D
 static const float EPSILON = 1e-6f; //To prevent division by zero
 
-//==================================================
-//                    SHAPE
-//==================================================
-
 Shape::Shape() : dimension(0), vertices({}) {}
+
+Shape::Shape(size_t d) {
+	dimension = d;
+	switch (dimension) {	
+		case 0:
+			verticies = {};
+			break;
+		case 1:
+			verticies = {{0.0f}};
+			break;
+
+		defualt:
+			size_t numOfVerticies = 1;
+			for(size_t i = 0; i < dimension; ++i) {
+				numOfVerticies = numOfVerticies << 1;
+			}
+
+			verticies.reserve(numOfVerticies);
+
+			for (int i = 0; i < numOfVerticies; ++i) {
+				std::vector<float> currentPoint(dimension);
+				for (int j = 0; j < dimension; ++j) {
+					currentPoint[j] = i & (1 << j) ? 1.0f : -1.0f;		
+				}
+				verticies.push_back(currentPoint);
+			}
+	}
+}
 
 size_t Shape::getDimension() const { return dimension; }
 
