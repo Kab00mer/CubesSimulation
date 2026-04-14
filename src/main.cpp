@@ -1,13 +1,14 @@
 #include <SDL3/SDL.h>
-#include "cubes.h"
+#include "cube.h"
 #include "rendering.h"
 
 static const float ROTATE_SPEED = 0.0002f;
 static const float SHAPE_SIZE = 80.0f;
+static const size_t STARTING_DIMENSION = 3;
 
 int main(int argc, char* argv[]) {
-	startApp();
-	Cube currentCube = Cube(3);
+	startApp(STARTING_DIMENSION);
+	Cube currentCube = Cube(STARTING_DIMENSION);
 
 	bool running = true;
 	SDL_Event event;
