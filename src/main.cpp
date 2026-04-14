@@ -2,12 +2,11 @@
 #include "cube.h"
 #include "rendering.h"
 
-static const float ROTATE_SPEED = 0.0002f;
-static const float SHAPE_SIZE = 80.0f;
+static const double SHAPE_SIZE = 80.0f;
 static const size_t STARTING_DIMENSION = 3;
 
 int main(int argc, char* argv[]) {
-	startApp(STARTING_DIMENSION);
+	startApp(STARTING_DIMENSION, RenderingMode::RGB);
 	Cube currentCube = Cube(STARTING_DIMENSION);
 
 	bool running = true;
@@ -15,7 +14,7 @@ int main(int argc, char* argv[]) {
 	while (running) {	
 		render(currentCube, SHAPE_SIZE);
 
-		currentCube.rotate(ROTATE_SPEED);
+		currentCube.rotate(getSpeed());
 
 		while (SDL_PollEvent(&event)) { 
 			if (event.type == SDL_EVENT_QUIT) { 
@@ -23,11 +22,13 @@ int main(int argc, char* argv[]) {
 			} else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
 				SDL_FPoint point = { event.button.x, event.button.y };
 				userClickedAt(point);
+			} else if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+				userReleased();
 			}
 		}
 
-		if (userSetNewDimension()) {
-			currentCube = Cube(getNewDimension());
+		if (getUserDimension() != currentCube.getDimension()) {
+			currentCube = Cube(getUserDimension());
 		}
 	}
 
